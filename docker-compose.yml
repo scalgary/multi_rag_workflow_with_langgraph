@@ -1,6 +1,6 @@
 services:
   jupyter-dev:
-    container_name: my-python-dev
+    container_name: multi-rag
     build: .
     platform: linux/amd64
     volumes:
@@ -12,3 +12,6 @@ services:
     command: >
       sh -c "pip install jupyter jupyterlab ipykernel &&
               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
+
+    #http://localhost:8888
+    #token in logs
