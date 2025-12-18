@@ -1,7 +1,8 @@
 services:
   jupyter-dev:
-    container_name: multi-rag
+    image: raggy:latest
     build: .
+    container_name: multi-rag
     platform: linux/amd64
     volumes:
       - .:/workspace
@@ -10,8 +11,11 @@ services:
       - "8888:8888"
     env_file: .env
     command: >
-      sh -c "pip install jupyter jupyterlab ipykernel &&
-              jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
+      sh -c "pip install -r requirements-dev.txt &&
+             pip install jupyter jupyterlab ipykernel &&
+             pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126 &&
+             jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
 
     #http://localhost:8888
     #token in logs
+    # reinstall everything all the time
